@@ -8,6 +8,8 @@ RUN apt-get -y update && \
 RUN git clone https://github.com/facebook/folly.git && \
     git clone https://github.com/facebook/wdt.git && \
     cd wdt; cmake .; make; make install; rm -rf folly wdt
+    
+RUN apk add --no-cache openssh-client git
 
 ENV WDTDATA /data
 
