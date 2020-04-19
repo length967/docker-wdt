@@ -3,6 +3,7 @@ FROM ubuntu:18.04
 # Install basic deps for all packages
 RUN apt-get update && \
     apt-get install -y \
+    apt-utils \
     cmake \
     git \
     wget \
@@ -28,6 +29,7 @@ RUN apt-get install -y \
     binutils-dev \
     libjemalloc-dev \
     libssl-dev \
+    build-essential \
     pkg-config
 
 # Install folly itself
