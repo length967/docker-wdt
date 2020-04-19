@@ -39,8 +39,8 @@ RUN apt-get install -y \
     libboost-all-dev
 
 RUN sudo mkdir /usr/app && sudo chmod 777 /usr/app
-    git clone --recurse-submodules https://github.com/length967/warp-cli.git /usr/app/warp-cli
-    python3 /usr/app/warp-cli/core/warp.py --install
+RUN git clone --recurse-submodules https://github.com/length967/warp-cli.git /usr/app/warp-cli
+RUN python3 /usr/app/warp-cli/core/warp.py --install
         
 ENV WDTDATA /data
 
