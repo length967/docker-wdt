@@ -1,13 +1,50 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
-RUN apt-get -y update && \
-    apt-get install -y cmake git wget g++ && \
-    apt-get install -y libssh-dev libgoogle-glog-dev libboost-system-dev libdouble-conversion-dev libjemalloc-dev && \
-    rm -rf /var/lib/apt/lists/*
+# Install basic deps for all packages
+RUN apt-get update && \
+    apt-get install -y \
+    cmake \
+    git \
+    wget \
+    g++
 
-RUN git clone https://github.com/facebook/folly.git && \
-    git clone https://github.com/facebook/wdt.git && \
-    cd wdt; cmake .; make; make install; rm -rf folly wdt
+# Install Folly
+
+# Install folly package deps
+RUN apt-get install -y \
+    g++ \
+    cmake \
+    libboost-all-dev \
+    libevent-dev \
+    libdouble-conversion-dev \
+    libgoogle-glog-dev \
+    libgflags-dev \
+    libiberty-dev \
+    liblz4-dev \
+    liblzma-dev \
+    libsnappy-dev \
+    make \
+    zlib1g-dev \
+    binutils-dev \
+    libjemalloc-dev \
+    libssl-dev \
+    pkg-config
+
+# Install folly itself
+RUN git clone https://github.com/facebook/folly.git
+
+# Install WDT from source
+RUN apt-get install -y \
+    libgtest-dev \
+    libboost-all-dev
+
+RUN git clone --single-branch --branch folly-fixes https://github.com/sashanullptr/wdt.git && \
+    cd wdt && \
+    mkdir _build && cd _build && \
+    cmake .. \
+    -DBUILD_TESTING=off && \
+    make -j$(nproc) && \
+    make install
     
 RUN apk add --no-cache openssh-client git
 
