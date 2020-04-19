@@ -32,24 +32,16 @@ RUN apt-get install -y \
     build-essential \
     pkg-config
 
-# Install folly itself
-RUN git clone https://github.com/facebook/folly.git
 
 # Install WDT from source
 RUN apt-get install -y \
     libgtest-dev \
     libboost-all-dev
 
-RUN git clone --single-branch --branch folly-fixes https://github.com/sashanullptr/wdt.git && \
-    cd wdt && \
-    mkdir _build && cd _build && \
-    cmake .. \
-    -DBUILD_TESTING=off && \
-    make -j$(nproc) && \
-    make install
-    
-RUN apk add --no-cache openssh-client git
-
+RUN sudo mkdir /usr/app && sudo chmod 777 /usr/app
+    git clone --recurse-submodules https://github.com/length967/warp-cli.git /usr/app/warp-cli
+    python3 /usr/app/warp-cli/core/warp.py --install
+        
 ENV WDTDATA /data
 
 VOLUME ["/data"]
