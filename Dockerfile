@@ -38,7 +38,7 @@ RUN apt-get install -y \
     libgtest-dev \
     libboost-all-dev
 
-RUN sudo mkdir /usr/app && sudo chmod 777 /usr/app
+RUN mkdir /usr/app && chmod 777 /usr/app
 RUN git clone --recurse-submodules https://github.com/length967/warp-cli.git /usr/app/warp-cli
 RUN python3 /usr/app/warp-cli/core/warp.py --install
         
