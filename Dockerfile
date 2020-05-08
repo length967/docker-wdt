@@ -8,6 +8,7 @@ RUN apt-get update && \
     git \
     wget \
     python-requests \
+    python3.7 \
     g++
 
 # Install Folly
