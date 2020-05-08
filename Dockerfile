@@ -7,6 +7,7 @@ RUN apt-get update && \
     cmake \
     git \
     wget \
+    python-requests \
     g++
 
 # Install Folly
