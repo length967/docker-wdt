@@ -4,7 +4,7 @@ Docker image for Warp speed Data Transfer (WDT)
 # Install
 
 ```bash
-$ docker pull flier/wdt
+$ docker pull length967/docker-wdt
 ```
 
 ## Usage
